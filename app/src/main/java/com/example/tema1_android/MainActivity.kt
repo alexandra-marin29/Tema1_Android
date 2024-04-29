@@ -44,5 +44,16 @@ class MainActivity : ComponentActivity() {
             ZooAnimalList(animals)
         }
     }
+
+    @Composable
+    fun ZooAnimalList(animals: List<Animal>) {
+        LazyColumn {
+            items(animals) { animal ->
+                AnimalRow(animal)
+            }
+        }
+    }
+
+
 }
 
