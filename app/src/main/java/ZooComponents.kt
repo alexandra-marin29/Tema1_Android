@@ -5,6 +5,7 @@ import android.graphics.drawable.GradientDrawable
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -23,6 +24,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 
@@ -32,13 +35,19 @@ data class Animal(val name: String, val continent: String)
 @Composable
 fun AnimalRow(animal: Animal) {
     val backgroundColor = getContinentColor(animal.continent)
-    val textColor = Color.Black
+    val textColor = if (animal.continent in listOf("Europe", "Asia", "North America", "Australia", "Antarctica")) {
+        Color.White
+    } else {
+        Color.Black
+    }
     val padding = 16.dp
+    val cellHeight = 108.dp
 
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 4.dp)
+            .height(cellHeight)
+            .padding(vertical = 8.dp)
             .background(backgroundColor)
     ) {
         when (animal.continent) {
@@ -51,25 +60,42 @@ fun AnimalRow(animal: Animal) {
             "Africa" -> {
                 Column(modifier = Modifier.padding(padding)) {
                     Text(text = animal.name, color = textColor, fontSize = 16.sp)
-                    Divider(color = Color.Black, thickness = 1.dp)
+                    Divider(color = Color.Black, thickness = 1.5.dp)
                     Text(text = animal.continent, color = textColor, fontSize = 16.sp)
                 }
             }
             "Asia" -> {
                 Row(
                     modifier = Modifier
-                        .padding(padding)
-                        .fillMaxWidth(),
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text(text = animal.name, modifier = Modifier.weight(1f), color = textColor, fontSize = 16.sp)
-                    Divider(color = Color.Black, modifier = Modifier
-                        .fillMaxHeight()
-                        .width(1.dp))
-                    Text(text = animal.continent, modifier = Modifier.weight(1f), color = textColor, fontSize = 16.sp)
+                    Text(
+                        text = animal.name,
+                        color = textColor,
+                        fontSize = 16.sp,
+                        modifier = Modifier
+                            .weight(1f)
+                            .wrapContentWidth(Alignment.Start)
+                    )
+                    Divider(
+                        color = Color.Black,
+                        modifier = Modifier
+                            .fillMaxHeight()
+                            .width(1.5.dp)
+                    )
+                    Text(
+                        text = animal.continent,
+                        color = textColor,
+                        fontSize = 16.sp,
+                        modifier = Modifier
+                            .weight(1f)
+                            .wrapContentWidth(Alignment.End)
+                    )
                 }
             }
-            "North America" -> {
+                "North America" -> {
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -103,7 +129,7 @@ fun AnimalRow(animal: Animal) {
                         fontSize = 16.sp,
                         textAlign = TextAlign.End
                     )
-                    Divider(color = Color.Black, thickness = 1.dp)
+                    Divider(color = Color.Black, thickness = 1.5.dp)
                     Text(
                         text = animal.continent,
                         color = textColor,
@@ -131,7 +157,7 @@ fun AnimalRow(animal: Animal) {
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(text = animal.name, textAlign = TextAlign.Center, color = textColor, fontSize = 16.sp)
-                    Divider(color = Color.Black, thickness = 1.dp)
+                    Divider(color = Color.Black, thickness = 1.5.dp)
                     Text(text = animal.continent, textAlign = TextAlign.Center, color = textColor, fontSize = 16.sp)
                 }
             }
@@ -141,13 +167,13 @@ fun AnimalRow(animal: Animal) {
 
 fun getContinentColor(continent: String): Color {
     return when (continent) {
-        "Europe" -> Color.Green
-        "Africa" -> Color.Yellow
-        "Asia" -> Color.Red
-        "North America" -> Color(0xFF8B4513) // Brown
-        "South America" -> Color(0xFFFFA500) // Orange
-        "Australia" -> Color.Magenta
-        "Antarctica" -> Color.Blue
+        "Europe" -> Color(0xFF008000)
+        "Africa" -> Color(0xFFFFFF00)
+        "Asia" -> Color(0xFFFF0000)
+        "North America" -> Color(0xFFA52A2A)
+        "South America" -> Color(0xFFFFA500)
+        "Australia" -> Color(0xFF00008B)
+        "Antarctica" -> Color(0xFF00719B)
         else -> Color.Gray
     }
 }
@@ -160,9 +186,6 @@ val animals = listOf(
     Animal("Wild Boar", "Europe"),
     Animal("Scottish Wildcat", "Europe"),
     Animal("Alpine Ibex", "Europe"),
-    Animal("Mongoose Lemur", "Europe"),
-    Animal("Eurasian Sparrowhawk", "Europe"),
-    Animal("Common Crane", "Europe"),
 
 
     Animal("Giant Panda", "Asia"),
@@ -171,10 +194,6 @@ val animals = listOf(
     Animal("Orangutan", "Asia"),
     Animal("Indian Rhinoceros", "Asia"),
     Animal("Komodo Dragon", "Asia"),
-    Animal("Snow Leopard", "Asia"),
-    Animal("Gharial", "Asia"),
-    Animal("Golden Pheasant", "Asia"),
-    Animal("Siamang", "Asia"),
 
 
     Animal("African Lion", "Africa"),
@@ -183,10 +202,7 @@ val animals = listOf(
     Animal("Zebra", "Africa"),
     Animal("Black Rhinoceros", "Africa"),
     Animal("Cheetah", "Africa"),
-    Animal("Hippopotamus", "Africa"),
-    Animal("Meerkat", "Africa"),
-    Animal("Secretarybird", "Africa"),
-    Animal("African Grey Parrot", "Africa"),
+
 
 
     Animal("Emperor Penguin", "Antarctica"),
@@ -195,10 +211,8 @@ val animals = listOf(
     Animal("Chinstrap Penguin", "Antarctica"),
     Animal("Gentoo Penguin", "Antarctica"),
     Animal("Leopard Seal", "Antarctica"),
-    Animal("Crabeater Seal", "Antarctica"),
     Animal("Wandering Albatross", "Antarctica"),
     Animal("Snow Petrel", "Antarctica"),
-    Animal("Southern Rockhopper Penguin", "Antarctica"),
 
 
     Animal("Andean Condor", "South America"),
@@ -206,7 +220,6 @@ val animals = listOf(
     Animal("Jaguar", "South America"),
     Animal("Giant Anteater", "South America"),
     Animal("Scarlet Macaw", "South America"),
-    Animal("Spectacled Caiman", "South America"),
     Animal("Maned Wolf", "South America"),
     Animal("Green Anaconda", "South America"),
     Animal("Giant Armadillo", "South America"),
@@ -220,8 +233,7 @@ val animals = listOf(
     Animal("Bald Eagle", "North America"),
     Animal("American Alligator", "North America"),
     Animal("Raccoon", "North America"),
-    Animal("Gray Wolf", "North America"),
-    Animal("Howler Monkey", "North America"),
+
 
     Animal("Kangaroo", "Australia"),
     Animal("Koala", "Australia"),
@@ -229,8 +241,5 @@ val animals = listOf(
     Animal("Wombat", "Australia"),
     Animal("Tasmanian Devil", "Australia"),
     Animal("Dingo", "Australia"),
-    Animal("Emu", "Australia"),
-    Animal("Cassowary", "Australia"),
-    Animal("Kookaburra", "Australia"),
-    Animal("Spangled Drongo", "Australia"),
+    Animal("Emu", "Australia")
     )
