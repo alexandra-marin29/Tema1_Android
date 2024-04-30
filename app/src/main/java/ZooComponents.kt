@@ -26,6 +26,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 
@@ -48,8 +49,10 @@ fun AnimalRow(animal: Animal) {
             .fillMaxWidth()
             .height(cellHeight)
             .padding(vertical = 8.dp)
-            .background(backgroundColor)
-    ) {
+            .background(
+                shape = RoundedCornerShape(20.dp),
+                color = backgroundColor
+            )    ) {
         when (animal.continent) {
             "Europe" -> {
                 Column(modifier = Modifier.padding(padding)) {
@@ -179,67 +182,54 @@ fun getContinentColor(continent: String): Color {
 }
 
 val animals = listOf(
-    Animal("Eurasian Lynx", "Europe"),
-    Animal("Brown Bear", "Europe"),
-    Animal("Grey Wolf", "Europe"),
-    Animal("European Roe Deer", "Europe"),
-    Animal("Wild Boar", "Europe"),
-    Animal("Scottish Wildcat", "Europe"),
-    Animal("Alpine Ibex", "Europe"),
-
-
-    Animal("Giant Panda", "Asia"),
-    Animal("Red Panda", "Asia"),
-    Animal("Siberian Tiger", "Asia"),
-    Animal("Orangutan", "Asia"),
-    Animal("Indian Rhinoceros", "Asia"),
-    Animal("Komodo Dragon", "Asia"),
-
-
     Animal("African Lion", "Africa"),
-    Animal("African Elephant", "Africa"),
-    Animal("Giraffe", "Africa"),
-    Animal("Zebra", "Africa"),
-    Animal("Black Rhinoceros", "Africa"),
-    Animal("Cheetah", "Africa"),
-
-
-
-    Animal("Emperor Penguin", "Antarctica"),
-    Animal("Weddell Seal", "Antarctica"),
-    Animal("Adélie Penguin", "Antarctica"),
+    Animal("Chinchilla", "South America"),
+    Animal("Giant Panda", "Asia"),
+    Animal("American Bison", "North America"),
+    Animal("Raccoon", "North America"),
+    Animal("Grey Wolf", "Europe"),
+    Animal("Eurasian Lynx", "Europe"),
+    Animal("Komodo Dragon", "Asia"),
+    Animal("Kangaroo", "Australia"),
+    Animal("Maned Wolf", "South America"),
     Animal("Chinstrap Penguin", "Antarctica"),
-    Animal("Gentoo Penguin", "Antarctica"),
-    Animal("Leopard Seal", "Antarctica"),
+    Animal("European Roe Deer", "Europe"),
     Animal("Wandering Albatross", "Antarctica"),
-    Animal("Snow Petrel", "Antarctica"),
-
-
-    Animal("Andean Condor", "South America"),
+    Animal("Zebra", "Africa"),
+    Animal("Scarlet Macaw", "South America"),
+    Animal("Alpine Ibex", "Europe"),
+    Animal("Brown Bear", "Europe"),
+    Animal("Moose", "North America"),
+    Animal("Bald Eagle", "North America"),
+    Animal("Giant Armadillo", "South America"),
+    Animal("Emperor Penguin", "Antarctica"),
+    Animal("Koala", "Australia"),
+    Animal("Black Rhinoceros", "Africa"),
+    Animal("Green Anaconda", "South America"),
+    Animal("Orangutan", "Asia"),
+    Animal("Cheetah", "Africa"),
     Animal("Capybara", "South America"),
+    Animal("Echidna", "Australia"),
+    Animal("Wild Boar", "Europe"),
     Animal("Jaguar", "South America"),
     Animal("Giant Anteater", "South America"),
-    Animal("Scarlet Macaw", "South America"),
-    Animal("Maned Wolf", "South America"),
-    Animal("Green Anaconda", "South America"),
-    Animal("Giant Armadillo", "South America"),
-
-
-    Animal("American Bison", "North America"),
-    Animal("Grizzly Bear", "North America"),
-    Animal("Moose", "North America"),
-    Animal("Polar Bear", "North America"),
-    Animal("Rocky Mountain Bighorn Sheep", "North America"),
-    Animal("Bald Eagle", "North America"),
     Animal("American Alligator", "North America"),
-    Animal("Raccoon", "North America"),
-
-
-    Animal("Kangaroo", "Australia"),
-    Animal("Koala", "Australia"),
-    Animal("Echidna", "Australia"),
-    Animal("Wombat", "Australia"),
-    Animal("Tasmanian Devil", "Australia"),
+    Animal("Scottish Wildcat", "Europe"),
+    Animal("Indian Rhinoceros", "Asia"),
+    Animal("Red Panda", "Asia"),
+    Animal("African Elephant", "Africa"),
+    Animal("Gentoo Penguin", "Antarctica"),
+    Animal("Emu", "Australia"),
     Animal("Dingo", "Australia"),
-    Animal("Emu", "Australia")
+    Animal("Tasmanian Devil", "Australia"),
+    Animal("Rocky Mountain Bighorn Sheep", "North America"),
+    Animal("Snow Petrel", "Antarctica"),
+    Animal("Leopard Seal", "Antarctica"),
+    Animal("Wombat", "Australia"),
+    Animal("Grizzly Bear", "North America"),
+    Animal("Giraffe", "Africa"),
+    Animal("Andean Condor", "South America"),
+    Animal("Red Panda", "Asia"),
+    Animal("American Alligator", "North America"),
+    Animal("Giraffe", "Africa")
     )
