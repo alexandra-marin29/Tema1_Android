@@ -3,6 +3,7 @@ package com.example.tema1_android
 import android.content.res.Resources
 import android.graphics.drawable.GradientDrawable
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
@@ -34,7 +35,7 @@ import androidx.compose.ui.unit.sp
 data class Animal(val name: String, val continent: String)
 
 @Composable
-fun AnimalRow(animal: Animal) {
+fun AnimalRow(animal: Animal, onClick: (Animal) -> Unit) {
     val backgroundColor = getContinentColor(animal.continent)
     val textColor = if (animal.continent in listOf("Europe", "Asia", "North America", "Australia", "Antarctica")) {
         Color.White
@@ -52,7 +53,10 @@ fun AnimalRow(animal: Animal) {
             .background(
                 shape = RoundedCornerShape(20.dp),
                 color = backgroundColor
-            )    ) {
+            )
+            .clickable { onClick(animal) }
+
+    ) {
         when (animal.continent) {
             "Europe" -> {
                 Column(modifier = Modifier.padding(padding)) {

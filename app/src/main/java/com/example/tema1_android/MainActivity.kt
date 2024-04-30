@@ -41,19 +41,20 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun MainContent() {
         Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-            ZooAnimalList(animals)
+            AnimalList(animals)
         }
     }
 
     @Composable
-    fun ZooAnimalList(animals: List<Animal>) {
+    fun AnimalList(animals: List<Animal>) {
         LazyColumn {
             items(animals) { animal ->
-                AnimalRow(animal)
+                AnimalRow(animal = animal) {
+                    println("Clicked on ${animal.name}")
+                }
             }
         }
     }
-
 
 }
 
