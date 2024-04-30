@@ -11,13 +11,13 @@
         android:id="@+id/animal_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="24sp" />
+        android:textSize="28sp" />
 
     <TextView
         android:id="@+id/animal_continent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="18sp"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="26dp" />
 
 </LinearLayout>

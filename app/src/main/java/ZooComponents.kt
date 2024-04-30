@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.unit.sp
 
 
@@ -75,7 +76,7 @@ fun AnimalRow(animal: Animal, onClick: (Animal) -> Unit) {
                         fontSize = 16.sp,
                         modifier = Modifier
                             .weight(1f)
-                            .wrapContentWidth(Alignment.Start)
+                            .wrapContentWidth(Alignment.CenterHorizontally)
                     )
                     Divider(
                         color = Color.Black,
@@ -89,7 +90,7 @@ fun AnimalRow(animal: Animal, onClick: (Animal) -> Unit) {
                         fontSize = 16.sp,
                         modifier = Modifier
                             .weight(1f)
-                            .wrapContentWidth(Alignment.End)
+                            .wrapContentWidth(Alignment.CenterHorizontally)
                     )
                 }
             }
