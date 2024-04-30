@@ -185,6 +185,7 @@ fun getContinentColor(continent: String): Color {
     }
 }
 
+
 val animals = listOf(
     Animal("African Lion", "Africa"),
     Animal("Chinchilla", "South America"),
