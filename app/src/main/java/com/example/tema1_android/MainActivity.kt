@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.FrameLayout
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
@@ -17,7 +15,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import com.example.tema1_android.ui.theme.Tema1_AndroidTheme
-import androidx.compose.ui.platform.findViewTreeCompositionContext
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,6 +24,11 @@ class MainActivity : AppCompatActivity() {
         val btnCloseApp = findViewById<Button>(R.id.btnCloseApp)
         btnCloseApp.setOnClickListener {
             finish()
+        }
+        val backButton = findViewById<Button>(R.id.backButton)
+
+        backButton.setOnClickListener {
+            onBackPressed()
         }
 
         val composeView = findViewById<ComposeView>(R.id.compose_view)
@@ -70,8 +72,4 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
-    fun closeFragment() {
-        findViewById<FrameLayout>(R.id.container).visibility = View.GONE
-        supportFragmentManager.popBackStack()
-    }
 }
