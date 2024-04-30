@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.graphics.Color
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 
 class AnimalDetailsFragment : Fragment() {
@@ -22,20 +23,35 @@ class AnimalDetailsFragment : Fragment() {
         val nameTextView = view.findViewById<TextView>(R.id.animal_name)
         nameTextView.text = name
         nameTextView.setTextColor(if (continent in listOf("Europe", "Asia", "North America", "Australia", "Antarctica")) {
-            android.graphics.Color.WHITE
+            Color.WHITE
         } else {
-            android.graphics.Color.BLACK
+            Color.BLACK
         })
 
         val continentTextView = view.findViewById<TextView>(R.id.animal_continent)
         continentTextView.text = continent
         continentTextView.setTextColor(if (continent in listOf("Europe", "Asia", "North America", "Australia", "Antarctica")) {
-            android.graphics.Color.WHITE
+            Color.WHITE
         } else {
-            android.graphics.Color.BLACK
+            Color.BLACK
         })
 
         view.setBackgroundColor(color)
+
+        val layout = view.findViewById<LinearLayout>(R.id.details_layout)
+        layout.orientation = LinearLayout.VERTICAL
+
+        val continentLayoutParams = ViewGroup.LayoutParams(
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+        val continentView = TextView(requireContext())
+        continentView.text = continent
+        continentView.setTextColor(if (continent in listOf("Europe", "Asia", "North America", "Australia", "Antarctica")) {
+            Color.WHITE
+        } else {
+            Color.BLACK
+        })
 
         return view
     }
