@@ -1,75 +1,75 @@
 package com.example.tema1_android
 
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
-import android.widget.FrameLayout
+import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.ComposeView
-import androidx.compose.ui.platform.ViewCompositionStrategy
-import com.example.tema1_android.ui.theme.Tema1_AndroidTheme
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), AnimalAdapter.OnItemClickListener {
+
+    private lateinit var nameOfAnAnimal: EditText
+    private lateinit var continent: EditText
+    private lateinit var addButton: Button
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var animalAdapter: AnimalAdapter
+    private val animals = mutableListOf<Animal>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val btnCloseApp = findViewById<Button>(R.id.btnCloseApp)
-        btnCloseApp.setOnClickListener {
-            finish()
-        }
-        val backButton = findViewById<Button>(R.id.backButton)
+        nameOfAnAnimal = findViewById(R.id.nameOfAnAnimal)
+        continent = findViewById(R.id.continent)
+        addButton = findViewById(R.id.addButton)
+        recyclerView = findViewById(R.id.listOfAnimals)
 
-        backButton.setOnClickListener {
-            onBackPressed()
-        }
+        animalAdapter = AnimalAdapter(animals, this)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = animalAdapter
 
-        val composeView = findViewById<ComposeView>(R.id.compose_view)
-        composeView.setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
-        composeView.setContent {
-            Tema1_AndroidTheme {
-                MainContent()
-            }
+        addButton.setOnClickListener {
+            addAnimal()
         }
     }
 
-    @Composable
-    fun MainContent() {
-        Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-            AnimalList(animals) { animal ->
-                openAnimalDetails(animal)
-            }
+    private fun addAnimal() {
+        val name = nameOfAnAnimal.text.toString().trim()
+        val continentName = continent.text.toString().trim()
+
+        if (name.isEmpty() || continentName.isEmpty()) {
+            Toast.makeText(this, "Please fill in both fields", Toast.LENGTH_SHORT).show()
+            return
         }
+
+        if (!isValidContinent(continentName)) {
+            Toast.makeText(this, "Invalid continent", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val existingAnimal = animals.find { it.name.equals(name, ignoreCase = true) }
+        if (existingAnimal != null) {
+            existingAnimal.continent = continentName
+        } else {
+            animals.add(Animal(name, continentName))
+        }
+
+        animalAdapter.notifyDataSetChanged()
     }
 
-    @Composable
-    fun AnimalList(animals: List<Animal>, onAnimalClick: (Animal) -> Unit) {
-        LazyColumn {
-            items(animals) { animal ->
-                AnimalRow(animal = animal, onClick = onAnimalClick)
-            }
-        }
+    private fun isValidContinent(continent: String): Boolean {
+        val validContinents = listOf("Africa", "Antarctica", "Asia", "Australia", "Europe", "North America", "South America")
+        return continent in validContinents
     }
 
-    fun openAnimalDetails(animal: Animal) {
-        val fragment = AnimalDetailsFragment().apply {
-            arguments = Bundle().apply {
-                putString("name", animal.name)
-                putString("continent", animal.continent)
-            }
-        }
-        findViewById<FrameLayout>(R.id.container).visibility = View.VISIBLE
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.container, fragment)
-            .addToBackStack(null)
-            .commit()
+    override fun onItemClick(animal: Animal) {
+        // Handle item click
     }
 
+    override fun onItemDelete(animal: Animal) {
+        animals.remove(animal)
+        animalAdapter.notifyDataSetChanged()
+    }
 }

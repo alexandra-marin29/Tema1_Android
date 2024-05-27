@@ -24,7 +24,7 @@ import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.unit.sp
 
 
-data class Animal(val name: String, val continent: String)
+data class Animal(val name: String, var continent: String)
 
 @Composable
 fun AnimalRow(animal: Animal, onClick: (Animal) -> Unit) {
