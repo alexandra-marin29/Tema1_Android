@@ -12,11 +12,12 @@ class AnimalViewModel(application: Application) : AndroidViewModel(application) 
     private val repository: AnimalRepository = AnimalRepository(application)
     val allAnimals: LiveData<List<Animal>> = repository.allAnimals
 
-    fun addAnimal(name: String, continent: String) {
+    fun addOrUpdateAnimal(name: String, continent: String) {
         viewModelScope.launch {
-            repository.insertAnimal(name, continent)
+            repository.insertOrUpdateAnimal(name, continent)
         }
     }
+
 
     fun deleteAnimal(animal: Animal) {
         viewModelScope.launch {

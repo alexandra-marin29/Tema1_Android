@@ -56,11 +56,13 @@ class MainActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            animalViewModel.addAnimal(name, continentName)
+            animalViewModel.addOrUpdateAnimal(name, continentName)
 
+            // Clear the input fields after adding the animal
             nameOfAnAnimal.text.clear()
             continent.text.clear()
         }
+
 
         animalViewModel.allAnimals.observe(this, Observer { animals ->
             animals?.let { animalAdapter.updateData(it) }

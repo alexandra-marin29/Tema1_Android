@@ -16,7 +16,7 @@ interface AnimalDao {
     suspend fun updateAnimal(animal: Animal)
 
     @Query("SELECT * FROM animals WHERE LOWER(name) = LOWER(:name) LIMIT 1")
-    suspend fun getAnimalByName(name: String): Animal?
+    fun getAnimalByNameIgnoreCase(name: String): Animal?
 
     @Query("SELECT * FROM animals")
     fun getAllAnimals(): LiveData<List<Animal>>

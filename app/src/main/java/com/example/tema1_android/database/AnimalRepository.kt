@@ -15,10 +15,11 @@ class AnimalRepository(application: Application) {
         allAnimals = animalDao.getAllAnimals()
     }
 
-    suspend fun insertAnimal(name: String, continent: String) {
+    suspend fun insertOrUpdateAnimal(name: String, continent: String) {
         withContext(Dispatchers.IO) {
-            val existingAnimal = animalDao.getAnimalByName(name)
+            val existingAnimal = animalDao.getAnimalByNameIgnoreCase(name)
             if (existingAnimal != null) {
+                existingAnimal.name = name
                 existingAnimal.continent = continent
                 animalDao.updateAnimal(existingAnimal)
             } else {
@@ -26,6 +27,7 @@ class AnimalRepository(application: Application) {
             }
         }
     }
+
 
     suspend fun deleteAnimal(animal: Animal) {
         withContext(Dispatchers.IO) {
