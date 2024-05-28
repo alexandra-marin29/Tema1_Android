@@ -34,4 +34,5 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/addButton"
         android:layout_margin="8dp"/>
+
 </RelativeLayout>

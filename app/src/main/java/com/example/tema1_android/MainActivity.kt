@@ -13,7 +13,6 @@ import com.example.tema1_android.database.Animal
 import com.example.tema1_android.viewmodel.AnimalViewModel
 
 class MainActivity : AppCompatActivity() {
-
     private lateinit var nameOfAnAnimal: EditText
     private lateinit var continent: EditText
     private lateinit var addButton: Button
