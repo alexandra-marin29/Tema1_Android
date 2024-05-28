@@ -39,5 +39,6 @@
             android:background="@drawable/button_delete_selector"
             android:layout_marginStart="8dp"
             android:contentDescription="Delete"/>
+
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

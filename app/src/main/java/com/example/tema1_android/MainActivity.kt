@@ -57,6 +57,9 @@ class MainActivity : AppCompatActivity() {
             }
 
             animalViewModel.addAnimal(name, continentName)
+
+            nameOfAnAnimal.text.clear()
+            continent.text.clear()
         }
 
         animalViewModel.allAnimals.observe(this, Observer { animals ->
