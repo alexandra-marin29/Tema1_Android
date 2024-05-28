@@ -6,9 +6,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.tema1_android.database.Animal
 
 class AnimalAdapter(
-    private val animals: List<Animal>,
+    private var animals: List<Animal>,
     private val itemClickListener: OnItemClickListener
 ) : RecyclerView.Adapter<AnimalAdapter.AnimalViewHolder>() {
 
@@ -17,7 +18,7 @@ class AnimalAdapter(
         fun onItemDelete(animal: Animal)
     }
 
-    class AnimalViewHolder(private val itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class AnimalViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(animal: Animal, clickListener: OnItemClickListener) {
             itemView.setOnClickListener {
                 clickListener.onItemClick(animal)
@@ -44,4 +45,9 @@ class AnimalAdapter(
     }
 
     override fun getItemCount() = animals.size
+
+    fun updateData(newAnimals: List<Animal>) {
+        animals = newAnimals
+        notifyDataSetChanged()
+    }
 }

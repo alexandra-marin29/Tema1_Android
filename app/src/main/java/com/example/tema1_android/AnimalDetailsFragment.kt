@@ -8,6 +8,7 @@ import android.widget.TextView
 import android.graphics.Color
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
+import com.example.tema1_android.R
 
 class AnimalDetailsFragment : Fragment() {
     override fun onCreateView(

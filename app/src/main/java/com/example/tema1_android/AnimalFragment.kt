@@ -9,6 +9,7 @@ import com.example.tema1_android.Animal
 import com.example.tema1_android.R
 import com.example.tema1_android.animals
 
+
 class AnimalFragment : Fragment() {
 
     override fun onCreateView(
