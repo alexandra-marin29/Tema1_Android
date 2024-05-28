@@ -9,6 +9,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/card_background"
         android:padding="16dp">
 
         <TextView
@@ -17,7 +18,8 @@
             android:layout_height="wrap_content"
             android:text="Animal Name"
             android:textSize="18sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:textColor="@android:color/black"/>
 
         <TextView
             android:id="@+id/animalContinent"
@@ -25,7 +27,8 @@
             android:layout_height="wrap_content"
             android:text="Continent"
             android:layout_below="@id/animalName"
-            android:layout_marginTop="4dp"/>
+            android:layout_marginTop="4dp"
+            android:textColor="@android:color/black"/>
 
         <Button
             android:id="@+id/deleteItem"
